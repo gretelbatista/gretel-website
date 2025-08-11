@@ -18,10 +18,7 @@
     h1,h2,h3{font-family:'Playfair Display',serif;}
     img{max-width:100%;display:block;}
     a{text-decoration:none;color:inherit;}
-    header{background:#fff;border-bottom:1px solid #eee;}
-    nav{display:flex;justify-content:center;gap:30px;padding:18px;}
-    nav a{color:var(--rose);font-weight:500;}
-    nav a:hover{color:var(--rose-dark);}
+
     /* Hero */
     .hero{position:relative;height:80vh;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;}
     .hero video,.hero img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;}
@@ -31,19 +28,24 @@
     .hero__sub{font-size:1.1rem;margin-bottom:24px;}
     .btn{display:inline-block;background:var(--rose);color:#fff;padding:12px 24px;border-radius:8px;margin:4px;}
     .btn:hover{background:var(--rose-dark);}
+
     /* Sections */
     section{padding:70px 20px;}
     section h2{text-align:center;font-size:2.4rem;color:var(--rose);margin-bottom:14px;}
     section p.section-intro{text-align:center;max-width:700px;margin:0 auto 40px;}
+
     /* Calendar */
     .calendar-list{list-style:none;max-width:700px;margin:0 auto;padding:0;}
     .calendar-list li{margin-bottom:18px;}
+
     /* Masonry Gallery */
     .masonry{columns:3 300px;column-gap:18px;max-width:1100px;margin:0 auto;}
     .masonry-item{break-inside:avoid;margin-bottom:18px;overflow:hidden;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+
     /* Press */
     .press-list{max-width:800px;margin:0 auto;}
     .press-list li{margin-bottom:30px;}
+
     /* Contact */
     .contact__wrap{max-width:980px;margin:0 auto;display:grid;gap:40px;grid-template-columns:1fr 1fr;}
     @media (max-width:820px){.contact__wrap{grid-template-columns:1fr;}}
@@ -52,17 +54,90 @@
     .btn-submit{background:var(--rose);color:#fff;border:0;border-radius:8px;padding:12px 24px;font-size:1rem;margin-top:10px;}
     .btn-submit:hover{background:var(--rose-dark);}
     footer{text-align:center;font-size:0.9em;color:#aaa;margin-top:40px;padding:20px 0;}
+
+    /* —— Luxe header —— */
+    .site-header{
+      position: sticky; top:0; z-index: 50;
+      background: rgba(255,255,255,.72);
+      backdrop-filter: saturate(160%) blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,.04);
+      transition: box-shadow .25s ease;
+    }
+    .site-header.is-scrolled{
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
+    .nav-wrap{
+      max-width: 1120px; margin: 0 auto;
+      height: 72px; padding: 0 20px;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    }
+    .brand{
+      justify-self: start;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: .12em; text-transform: uppercase;
+      font-size: 1.05rem; color: var(--ink);
+    }
+    .nav-links{ display: flex; gap: 28px; justify-self: end; align-items: center; }
+    .nav-links a{
+      position: relative; font-weight: 500; color: var(--ink);
+      letter-spacing: .02em;
+    }
+    .nav-links a::after{
+      content: ""; position: absolute; left: 0; bottom: -8px; height: 2px; width: 0;
+      background: linear-gradient(90deg, var(--rose), #e9dfd7);
+      transition: width .25s ease;
+    }
+    .nav-links a:hover::after{ width: 100%; }
+    .nav-links a[href="#contact"]{
+      padding: 10px 16px; border: 1px solid var(--soft); border-radius: 999px;
+    }
+    .nav-links a[href="#contact"]:hover{
+      border-color: var(--rose); color: var(--rose);
+    }
+    .nav-toggle{
+      display: none; justify-self: end;
+      width: 36px; height: 36px; border: 1px solid var(--soft); border-radius: 10px;
+      background: #fff;
+    }
+    .nav-toggle span{
+      display:block; height:2px; background: var(--ink); margin:7px 8px; transition: transform .2s ease, opacity .2s ease;
+    }
+    @media (max-width: 860px){
+      .nav-wrap{grid-template-columns: auto auto 1fr;}
+      .nav-toggle{display:flex; align-items:center; justify-content:center;}
+      .nav-links{
+        position: absolute; inset: 72px 0 auto 0;
+        background: rgba(255,255,255,.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(0,0,0,.04);
+        display: grid; gap: 14px; padding: 16px 20px;
+        transform: translateY(-16px); opacity: 0; pointer-events: none;
+        transition: transform .2s ease, opacity .2s ease;
+      }
+      .site-header.menu-open .nav-links{
+        transform: translateY(0); opacity: 1; pointer-events: auto;
+      }
+      .site-header.menu-open .nav-toggle span:nth-child(1){ transform: translateY(9px) rotate(45deg); }
+      .site-header.menu-open .nav-toggle span:nth-child(2){ opacity: 0; }
+      .site-header.menu-open .nav-toggle span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="#calendar">Performance Calendar</a>
-    <a href="#behind">Behind the Scenes</a>
-    <a href="#press">Press Features</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<header class="site-header" id="top">
+  <div class="nav-wrap">
+    <a class="brand" href="#top" aria-label="Home">GRETEL BATISTA</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#calendar">Performance calendar</a>
+      <a href="#behind">Behind the scenes</a>
+      <a href="#press">Press features</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
 <section class="hero">
@@ -73,37 +148,39 @@
   <div class="hero__inner">
     <span class="hero__kicker"></span>
     <h1></h1>
-    <p class="hero__sub">Professional ballerina devoted to the beauty of this art form. A glimse into my world. I'm grateful you're here 🤍.</p>
+    <p class="hero__sub">Professional ballerina devoted to the beauty of this art form. A glimpse into my world. I'm grateful you're here 🤍.</p>
     <div>
       <a href="#calendar" class="btn">See Performances</a>
       <a href="#contact" class="btn">Booking & Inquiries</a>
     </div>
   </div>
 </section>
-
+<!-- Performance Calendar -->
 <section id="calendar">
   <h2>Performance Calendar</h2>
   <p class="section-intro">Upcoming performance programs, dates and casting info will be updated here regularly.</p>
   <ul class="calendar-list">
-    <li><strong>September 9-15, 2025 –</strong> "Onegin" by John Cranko – Wortham Theater, Houston, TX</li>
-    <li><strong>September 18-28, 2025 –</strong> "What I was thinking while I was waltzing" by Bret Ishida – Wortham Theater, Houston, TX</li>
-    <li><strong>July 5 & 6, 2025 –</strong> Giselle – Tokyo, Japan</li>
+    <li><strong>September 9–15, 2025 –</strong> “Onegin” by John Cranko — Wortham Theater, Houston, TX</li>
+    <li><strong>September 18–28, 2025 –</strong> “What I Was Thinking While I Was Waltzing” by Bret Ishida — Wortham Theater, Houston, TX</li>
+    <li><strong>July 5 & 6, 2025 –</strong> Giselle — Tokyo, Japan</li>
   </ul>
 </section>
 
+<!-- Behind the Scenes (masonry gallery) -->
 <section id="behind" style="background:var(--cream);">
   <h2>Behind the Scenes</h2>
   <p class="section-intro">Performances, photoshoots and captured moments.</p>
   <div class="masonry">
-    <figure class="masonry-item"><img src="Gretel5.jpg" alt="Gretel Dance 5"></figure>
-    <figure class="masonry-item"><img src="Gretel7.jpg" alt="Gretel Dance 7"></figure>
-    <figure class="masonry-item"><img src="Gretel4.jpg" alt="Gretel Dance 4"></figure>
-    <figure class="masonry-item"><img src="Gretel1.jpg" alt="Gretel Dance 1"></figure>
-    <figure class="masonry-item"><img src="Gretel6.jpg" alt="Gretel Dance 6"></figure>
-    <figure class="masonry-item"><img src="Giselle3(1)(1).jpg" alt="Giselle Dance"></figure>
+    <figure class="masonry-item"><img src="Gretel5.jpg" alt="Gretel Dance 5" loading="lazy"></figure>
+    <figure class="masonry-item"><img src="Gretel7.jpg" alt="Gretel Dance 7" loading="lazy"></figure>
+    <figure class="masonry-item"><img src="Gretel4.jpg" alt="Gretel Dance 4" loading="lazy"></figure>
+    <figure class="masonry-item"><img src="Gretel1.jpg" alt="Gretel Dance 1" loading="lazy"></figure>
+    <figure class="masonry-item"><img src="Gretel6.jpg" alt="Gretel Dance 6" loading="lazy"></figure>
+    <figure class="masonry-item"><img src="Giselle3(1)(1).jpg" alt="Giselle Dance" loading="lazy"></figure>
   </div>
 </section>
 
+<!-- Press -->
 <section id="press">
   <h2>Press Features</h2>
   <div class="press-list">
@@ -111,12 +188,14 @@
       <li>
         <strong>(February 2024): Artburst News by Orlando Taquechel</strong>
         <a href="#" style="color: var(--rose);">“Giselle review”</a>
-        <img src="Gisellereview1.jpg" alt="Giselle Review 1" style="border-radius:16px;margin-top:10px;">
+        <img src="Gisellereview1.jpg" alt="Giselle Review 1" style="border-radius:16px;margin-top:10px;" loading="lazy">
       </li>
     </ul>
-    <img src="Gisellereview2.jpg" alt="Giselle Review 2" style="border-radius:16px;margin-top:20px;">
+    <img src="Gisellereview2.jpg" alt="Giselle Review 2" style="border-radius:16px;margin-top:20px;" loading="lazy">
   </div>
 </section>
+
+<!-- Contact -->
 <section id="contact" style="background:#fff;">
   <h2>Contact</h2>
   <div class="contact__wrap">
@@ -126,7 +205,7 @@
         Bookings, collaborations, or a note — I’d love to hear from you.
       </p>
 
-      <!-- Mail: block -->
+      <!-- Mail block -->
       <p style="line-height:1.8;margin:8px 0 16px;">
         <strong>Mail:</strong><br>
         Houston Ballet<br>
@@ -141,10 +220,9 @@
           Instagram @gretelbatista
         </a>
       </p>
-      </p>
     </div>
 
-    <!-- Right: Formspree form (kept from your working setup) -->
+    <!-- Right: Formspree form (working) -->
     <form id="contact-form" action="https://formspree.io/f/xkgzkkrd" method="POST" novalidate>
       <h3 style="font-family:'Playfair Display',serif;margin:0 0 8px;">Get in touch</h3>
       <p style="margin:0 0 12px;color:#555;">I read every note. For media or partnerships, please include timelines and links.</p>
@@ -172,8 +250,7 @@
 
       <!-- spam honeypot -->
       <input type="text" name="_gotcha" style="display:none">
-
-      <!-- Optional subject line -->
+      <!-- subject line -->
       <input type="hidden" name="_subject" value="New message from gretelbatista.com">
 
       <button type="submit" class="btn-submit">Send</button>
@@ -186,10 +263,41 @@
   © <span id="year"></span> Gretel Batista. All rights reserved.
 </footer>
 
-<!-- Tiny JS: current year + Formspree async submit -->
+<!-- Tiny JS: header effects + smooth scroll + Formspree -->
 <script>
   // current year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // scroll shadow on luxe header
+  const header = document.querySelector('.site-header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 4);
+  onScroll(); window.addEventListener('scroll', onScroll);
+
+  // mobile menu toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const root = document.querySelector('.site-header');
+  if (toggle){
+    toggle.addEventListener('click', () => {
+      const open = root.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // close menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => root.classList.remove('menu-open'));
+    });
+  }
+
+  // smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(el){
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
 
   // Formspree async submit (kept from your working setup)
   const form = document.getElementById('contact-form');
