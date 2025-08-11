@@ -122,6 +122,39 @@
       .site-header.menu-open .nav-toggle span:nth-child(2){ opacity: 0; }
       .site-header.menu-open .nav-toggle span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
     }
+    /* — Lux header + menu button — */
+.nav-toggle{
+  display: flex;
+  flex-direction: column;      /* stack the lines */
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 36px; height: 36px;
+  border: 1px solid var(--soft);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  margin-left: 14px;           /* space between name and button */
+}
+
+.nav-toggle span{
+  width: 18px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* Animate burger to X when menu is open */
+.site-header.menu-open .nav-toggle span:nth-child(1){
+  transform: translateY(6px) rotate(45deg);
+}
+.site-header.menu-open .nav-toggle span:nth-child(2){
+  opacity: 0;
+}
+.site-header.menu-open .nav-toggle span:nth-child(3){
+  transform: translateY(-6px) rotate(-45deg);
+}
   </style>
 </head>
 <body>
@@ -129,13 +162,11 @@
 <header class="site-header">
   <div class="nav-wrap">
     <div class="brand">GRETEL BATISTA</div>
-
-    <button class="nav-toggle" aria-label="Menu">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
-
     <div class="nav-links">
       <a href="#calendar">Performance Calendar</a>
       <a href="#behind">Behind the Scenes</a>
