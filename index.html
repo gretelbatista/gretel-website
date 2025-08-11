@@ -94,13 +94,14 @@
     .nav-links a[href="#contact"]:hover{
       border-color: var(--rose); color: var(--rose);
     }
-    .nav-toggle{
-      display: none; justify-self: end;
-      width: 36px; height: 36px; border: 1px solid var(--soft); border-radius: 10px;
-      background: #fff;
-    }
-    .nav-toggle span{
-      display:block; height:2px; background: var(--ink); margin:7px 8px; transition: transform .2s ease, opacity .2s ease;
+    .nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 18px;
+  background: var(--ink);
+  margin: 4px auto;
+  border-radius: 1px;
+  transition: transform .2s ease, opacity .2s ease;
     }
     @media (max-width: 860px){
       .nav-wrap{grid-template-columns: auto auto 1fr;}
